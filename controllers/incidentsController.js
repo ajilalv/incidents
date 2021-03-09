@@ -13,7 +13,7 @@ exports.getAllIncidents = function(req, res, next) {
   });
 };
 
-//Show a single Incidents details by using its ID
+//Show a single Incident details by using its ID
 exports.getIncident = function(req, res, next) {
   const reqid = req.params.id;
   mysql.getIncident(reqid, req.user.USER_ID, incident => {
