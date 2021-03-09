@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('part/head') %>
+  </head>
+
+ <body>
+<div class="content">  
+    <%- include ("part/header") %>
+   
+    <main class="main center"  >
+      <% if(user == null) { %>
+      <h2>
+        No Idea about this user
+      </h2>
+      <% } else { %>
+        <h2> Hello, <%- user.UNAME %> </h2>
+      <div >
+              <a href="/incidents/new"><button>Add New Incident</button></a>
+              <a href="/user/logout"><button>Log Out</button></a>
+      </div>
+
+      
+      <% } %>
+    </main>
+  <%- include ("part/footer") %>
+   </div>
+  </body>
+</html>

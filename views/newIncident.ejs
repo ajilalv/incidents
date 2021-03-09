@@ -1,0 +1,511 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ("part/head") %>
+    <link rel="stylesheet" href="/customInputs.css" />
+    <script src="/static.js"></script>
+    <script src="/client.js" defer="defer"></script>
+  </head>
+
+  <body>
+    <div class="content" style="background:lightgray;" >
+      
+    <%- include ("part/header") %>
+      <main class="main" >  
+    
+      <form>
+        <div class="sec">
+          <div class="sec1">
+            <!-- Basic Details -->
+            <fieldset class="secBasic" disabled >
+            <legend class="subHead">
+                <label class="customInput">Click to Show Your Details
+                  <input id="chkBasic" type="checkbox"/>
+                  <span class="mark rectangle"></span>
+                </label>
+              </legend>
+              <div class="row">
+                <label class="input-group">
+                  <span class="input-label langEn" data-en="Organisation Name" data-ar="اسم المؤسسة"></span>
+                  <input
+                    name="basicOrgValue"
+                    type="text"
+                    maxlength="25"
+                    placeholder="Reporting Organisation Name"
+                  />
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Person Name</span>
+                  <input
+                    name="basicNameValue"
+                    type="text"
+                    maxlength="25"
+                    placeholder="Reporting Person Name"
+                  />
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Job Title</span>
+                  <input
+                    name="basicTitleValue"
+                    type="text"
+                    maxlength="25"
+                    placeholder="Job Title"
+                  />
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Contact Phone</span>
+                  <input
+                    name="basicPhoneValue"
+                    type="tel"
+                    maxlength="8"
+                    placeholder="Phone Number"
+                  />
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Email</span>
+                  <input
+                    name="basicEmailValue"
+                    type="email"
+                    maxlength="20"
+                    placeholder="Email"
+                  />
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- Organisations Involved -->
+            <fieldset class="secOrg">
+              <legend class="subHead">1. Organisations involved in Occurrence</legend>
+              <div class="row">
+                <label class="input-group">
+                  <span class="input-label">Infrastructure Manager</span>
+                  <input
+                    name="orgInfraValue"
+                    type="text"
+                    maxlength="20"
+                    placeholder="Infrastructure Manager"
+                    required>
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Service Provider(Operations)</span>
+                  <input
+                         required
+                    name="orgSPOperValue"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Service Provider(Operations)"       
+                  >
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Service Provider(Maintenance)</span>
+                  <input
+                    name="orgSPMainValue"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Service Provider(Maintenance)"
+                    required=""
+                  />
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Others</span>
+                  <input
+                    name="orgOthValue"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Others"
+                  />
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- Incident Types and Details -->
+            <fieldset class="secInc">
+              <legend class="subHead">2. Incident Types and Details</legend>
+              <div class="col">
+              <div class="row">
+                <div class="input-group">
+                  <div style="display:flex">
+                    <span class="input-label">Select the Incident Category </span>
+                    <a href="/appendix" target="_blank" <span class="input-label info">see Appendix A</span></a>
+                  </div>
+                  
+                  <div class="customInput-group">
+                    
+                    <label class="customInput">
+                      <p>Category A</p>
+                      <input
+                        name="incType"
+                        id="typeA"
+                        type="radio"
+                        value="A"
+                        checked
+                      /><span class="mark circle"></span>
+                    </label>
+                  
+                    <label class="customInput">
+                      <p>Category B</p>
+                      <input name="incType" type="radio" value="B" /><span
+                        class="mark circle"
+                      ></span>
+                    </label>
+                    <label class="customInput">
+                      <p>Category C</p>
+                      <input name="incType" type="radio" value="C" /><span
+                        class="mark circle"
+                      ></span>
+                    </label>
+                  </div>
+                </div>
+                </div>
+            <div class="row">
+                <label class="input-group">
+                  <span class="input-label">Weather</span>
+                  <input
+                    name="IncWeathValue"
+                    aria-label="a new dream"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Weather"
+                  />
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Incident Date &amp; Time</span>
+                  <input
+                    type="datetime-local"
+                    name="IncTimeValue"
+                    value="2021-06-12T19:30"
+                    min="2021-01-01T00:00"
+                    max="2022-12-31T00:00"
+                  />
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Your Ref Number</span>
+                  <input
+                    name="IncYourRefValue"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Your Reference Number (if any)"
+                  />
+                </label>
+              </div>
+                 </div>
+            </fieldset>
+
+            <!-- Location Details -->
+            <fieldset class="secLocation">
+              <legend class="subHead">3. Location</legend>
+              <div class="col">
+              <div class="row">
+                <div class="input-group">
+                  <span class="input-label">Select the Location Type</span>
+                  <div class="customInput-group">
+                    <label class="customInput">
+                      <p>
+                        Passenger Paid Area
+                      </p>
+                      <input
+                        name="locType"
+                        value="Loc1"
+                        id="Loc1"
+                        type="radio"
+                        checked
+                      />
+                      <span class="mark circle"></span>
+                    </label>
+                    <label class="customInput">
+                      <p>Non Paid Area</p>
+                      <input
+                        name="locType"
+                        value="Loc2"
+                        id="Loc2"
+                        type="radio"
+                      />
+                      <span class="mark circle"></span>
+                    </label>
+                    <label class="customInput">
+                      <p>Track</p>
+                      <input
+                        name="locType"
+                        value="Loc3"
+                        id="Loc3"
+                        type="radio"
+                      />
+                      <span class="mark circle"></span>
+                    </label>
+                    <label class="customInput">
+                      <p>Depot</p>
+                      <input
+                        name="locType"
+                        value="Loc4"
+                        id="Loc4"
+                        type="radio"
+                      />
+                      <span class="mark circle"></span>
+                    </label>
+                  </div>
+                </div>
+                 </div>
+<div class="row">
+                <label class="input-group" id="locGrp1">
+                  <span class="input-label">Station</span>
+                  <input
+                    name="locValue1"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Station"
+                  />
+                </label>
+                <label class="input-group" id="locGrp2">
+                  <span class="input-label">Platform</span>
+                  <input
+                    name="locValue2"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Platform"
+                  />
+                </label>
+                <label class="input-group" id="locGrp3" style="display: none;">
+                  <span class="input-label">Station 1 Name</span>
+                  <input
+                    name="locValue3"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Station 1 Name"
+                  />
+                </label>
+                <label class="input-group" id="locGrp4" style="display: none;">
+                  <span class="input-label">Station 2</span>
+                  <input
+                    name="locValue4"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Station 2"
+                  />
+                </label>
+              </div>
+                </div>
+            </fieldset>
+          </div>
+
+          <div class="sec2">
+            <!-- Infrastructure Involved -->
+            <fieldset class="secInfra">
+              <legend class="subHead">
+                <label class="customInput"
+                  >4. Any Infrastructure involved in/affected by Occurrence ?
+                  <input
+                    name="infraInvolChecked"
+                    id="chkInfra"
+                    type="checkbox"
+                  />
+                  <span class="mark rectangle"></span>
+                </label>
+              </legend>
+              <div class="row">
+                <label class="input-group">
+                  <span class="input-label">Trainset #</span>
+                  <input
+                    name="infraInvolTrainValue"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Trainset Number"
+                  />
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Railway Vehicle Number</span>
+                  <input
+                    name="infraInvolRVNValue"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Railway Vehicle Number"
+                  />
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Other Infrastructure Item</span>
+                  <input
+                    name="infraInvolOtherValue"
+                    type="text"
+                    maxlength="100"
+                    placeholder="asset type, number and location"
+                  />
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Description of Damage</span>
+                  <input
+                    name="infraInvolDescValue"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Description of Damage"
+                  />
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- Injury Details -->
+            <fieldset class="secInjury">
+              <legend class="subHead">
+                <label class="customInput"
+                  >5. Does Anyone Injured ?
+                  <input name="injuryChecked" id="chkInj" type="checkbox" />
+                  <span class="mark rectangle"></span>
+                </label>
+              </legend>
+              <div class="row">
+                <div class="input-group">
+                  <span class="input-label">Who got Injured ?</span>
+                  <select name="injuredSelected" class="input-box">
+                    <option value="PAS" selected="selected">Passenger</option>
+                    <option value="STA">Staff</option>
+                    <option value="PUB">Member of Public</option>
+                  </select>
+                </div>
+                <label class="input-group">
+                  <span class="input-label">Injury Severity</span>
+                  <input name="injSeverValue" type="text" maxlength="100" />
+                </label>
+                <div class="input-group">
+                  <label class="customInput">
+                    <p>Admitted in Hospital ?</p>
+                    <input
+                      name="injHospAdmChecked"
+                      id="chkInjHosp"
+                      type="checkbox"
+                    />
+                    <span class="mark rectangle"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="test"></div>
+            </fieldset>
+
+            <!-- Test Details  -->
+            <fieldset class="secTest">
+              <legend class="subHead">
+                <label class="customInput"
+                  >6. Post Incident Drug & Alcohol testing ?
+                  <input name="testChecked" id="chkTest" type="checkbox" />
+                  <span class="mark rectangle"></span>
+                </label>
+              </legend>
+              <div class="col" id="testDataInputs">
+                <div class="row">
+                <label class="input-group">
+                  <span class="input-label">Name</span>
+                  <input
+                    name="testName"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Name"
+                  />
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Position</span>
+                  <input
+                    name="testPos"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Position"
+                  />
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Test Type</span>
+                  <input
+                    name="testType"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Name"
+                  />
+                </label>
+                </div>
+<div class="row">
+                <label class="input-group small">
+                  <span class="input-label">Test Date</span>
+                  <input
+                    name="testDate"
+                    type="date"
+                    maxlength="100"
+                    placeholder="Date"
+                  />
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Test Result</span>
+                  <input
+                    name="testResult"
+                    type="text"
+                    maxlength="100"
+                    placeholder="Result"
+                  />
+                </label>
+                <button id="btnAddTest" class="">Add</button>
+                </div>
+              </div>
+              <table class="hide" id="tableTest">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Test Date</th>
+                    <th>Test Type</th>
+                    <th>Test Result</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </fieldset>
+
+            <!-- Descriptions  -->
+            <fieldset>
+              <legend class="subHead">7. Incident Descriptions</legend>
+              <div class="row">
+                <label class="input-group">
+                  <span class="input-label">Full Description of Occurence</span
+                  ><textarea
+                    name="descValue1"
+                    type="text"
+                    maxlength="250"
+                    placeholder="Full Description of Occurence"
+                  ></textarea>
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Description of cause(s)/contributing factor(s)</span
+                  ><textarea
+                    name="descValue2"
+                    type="text"
+                    maxlength="250"
+                    placeholder="Description of cause(s)/contributing factor(s)"
+                  ></textarea>
+                </label>
+                <label class="input-group">
+                  <span class="input-label">Description of consequence</span
+                  ><textarea
+                    name="descValue3"
+                    type="text"
+                    maxlength="250"
+                    placeholder="Description of consequence"
+                    required=""
+                  ></textarea>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row">
+          <button class="btnBig" type="submit" id="btnSubmitInc">Submit</button>
+        </div>
+      </form>
+          <div class="message">
+            <span>message goes here</span>
+          </div>
+    </main>
+       <%- include ("part/footer") %>
+    </div>
+    
+    <!-- include the Glitch button to show what the webpage is about and
+          to make it easier for folks to view source and remix 
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js" defer></script>-->
+  </body>
+</html>

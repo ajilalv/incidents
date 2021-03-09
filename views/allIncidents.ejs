@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('part/head') %>
+  </head>
+  <body>
+      <div class="content">     
+    <%- include ("part/header") %>
+    <main class="main center">
+      <% if (incidents) { %>
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th class="lowPriority" >Location Type</th>
+                    <th>Submitted by</th>
+                    <th class="lowPriority">Submitted On</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% incidents.forEach(function(incident){ %>
+                      <tr>
+                        <td><a href="/incidents/<%- incident.INC_ID  %>"> INC-REF-<%- incident.INC_ID  %> </a></td>
+                        <td><%- incident.INC_TYPE  %></td>
+                        <td class="lowPriority"><%- incident.INC_LOCATION  %></td>
+                        <td><%- incident.ORG_NAME  %></td>
+                        <td class="lowPriority"><%- incident.INC_DATE %></td>
+                      </tr>
+                        
+                    <% }); %>
+              </tbody>
+              </table>
+<% }else{ %>
+<h2>No Incidents Submitted yet !!</h2>
+      <a href="/">Add New Incident</a>
+<% } %>
+    </main>
+        <%- include ("part/footer") %>
+    </div>
+  </body>
+</html>

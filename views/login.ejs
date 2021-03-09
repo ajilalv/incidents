@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('part/head') %>
+    <script src="/static.js"></script>
+  </head>
+
+ <body>
+      <div class="content">    
+    <%- include ("part/header") %>
+   
+    <main class="main">
+      <form id="logFrm" action="/user/login" method="post">
+              <label class="input-group">
+                  <span class="input-label">User Email</span>
+                  <input
+                    value='user1@demo.com'
+                    name="username"
+                    type="email"
+                    maxlength="14"
+                    placeholder="user1@demo.com"
+                    required
+                  />
+                </label>
+              <label class="input-group">
+                  <span class="input-label">Password</span>
+                  <input
+                    name="userpass"
+                    type="password"
+                    maxlength="4"
+                    placeholder="password is 'demo'"
+                    required
+                  />
+                </label>
+        <h4>
+          password is : demo
+        </h4>
+        <button>
+          Log In
+        </button>
+      </form>
+    </main>
+        <%- include ("part/footer") %>
+   </div>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('part/head') %>
+  </head>
+
+ <body>
+<div class="content">  
+    <%- include ("part/header") %>   
+    <main class="main">
+    <% if(msg != null) { %>
+        <%- msg %>
+    <% } else { %>
+      <h2>
+        Nothing to Show here
+      </h2>
+    <% } %>
+    </main>
+    <%- include ("part/footer") %>
+   </div>
+  </body>
+</html>
