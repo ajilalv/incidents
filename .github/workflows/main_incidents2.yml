@@ -1,0 +1,35 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy container app to Azure Web App - incidents2
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - uses: actions/checkout@master
+
+    - uses: azure/docker-login@v1
+      with:
+        login-server: https://index.docker.io/v1/
+        username: ${{ secrets.AzureAppService_ContainerUsername_441c7fff4e2a4a46a9b41d827002d868 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_71cc7f944798467d85ff9dc967de1597 }}
+
+    - run: |
+        docker build . -t index.docker.io/${{ secrets.AzureAppService_ContainerUsername_441c7fff4e2a4a46a9b41d827002d868 }}/ajilalv/incidents:${{ github.sha }}
+        docker push index.docker.io/${{ secrets.AzureAppService_ContainerUsername_441c7fff4e2a4a46a9b41d827002d868 }}/ajilalv/incidents:${{ github.sha }}
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'incidents2'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_0d5e131198f6439c9a6c4425013d1185 }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_441c7fff4e2a4a46a9b41d827002d868 }}/ajilalv/incidents:${{ github.sha }}'
