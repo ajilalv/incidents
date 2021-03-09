@@ -1,0 +1,34 @@
+.navBar {
+  background-color: #2F5282;
+  display: flex;
+  justify-content: center;
+  z-index: 500;
+  box-shadow: 5px 3px 5px rgba(26, 25, 25, 0.35);
+}
+
+.navBar > ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navBar > ul > li {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  margin: 5px;
+}
+
+.active{
+  background: var(--highlight);
+}
+
+.navBar a {
+  color: white;
+  text-decoration: none;
+}
+
+.navBar > ul > li:hover,li:active {
+  background: gray;
+}

@@ -1,0 +1,88 @@
+.customInput-group {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 2px;
+}
+
+.customInput {
+  display: block;
+  position: relative;
+  padding: 1px 25px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default input button */
+.customInput input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.customInput p {
+  margin: -2px 1px;
+  font-size: 0.9em;
+}
+
+/* Style of Marker */
+.mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: lightgray;
+}
+
+/* Create a custom radio button */
+.circle {
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.customInput:hover input ~ .mark {
+  background-color: gray;
+}
+
+/* When the radio button is checked, add a blue background */
+.customInput input:checked ~ .mark {
+  background-color: #2B475E;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.mark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.customInput input:checked ~ .mark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.customInput .circle:after {
+  top: 5px;
+  left: 5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+/* Style the checkmark/indicator */
+.customInput .rectangle:after {
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

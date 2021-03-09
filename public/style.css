@@ -1,0 +1,298 @@
+/* styles */
+/* called by your view template */
+
+:root {
+  --head-color: #425563;
+  --head-text: #fff;
+  --page-back-color: #fff;
+  --text-color: black;
+  --sub-text: #5d8ba8;
+  --highlight: #307FE2;
+  --hover-color: rgba(0, 183, 255, 0.479);
+  --alt-color: rgba(185, 209, 243, 0.2);
+  --ss-color: rgba(74, 80, 39, 0.5);
+  --input-height: 30px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,body {
+  font-family: "Segoe UI";
+  padding:0;
+  margin:0;
+  height:100%;
+  width:100%;
+}
+
+.content {
+  display:flex;
+  flex-direction:column;
+  height:inherit;
+  
+}
+
+.main{
+  flex:1 1 auto;
+  overflow-y:auto;
+}
+
+
+.main form {
+  box-shadow: 5px 2px 5px 2px var(--head-color);
+	padding: 25px;
+  max-width: 1000px;
+  margin: 10px auto;
+  max-width: 1000px;
+  background:#fff;
+}
+
+.sec{
+  padding: 25px 50px;
+}
+
+
+fieldset {
+  /*padding: 3px;
+  background: #d3d3d347;
+  margin: 15px auto 5px -15px;*/
+  border:none;
+}
+
+input:focus,
+textarea:focus {
+  border-radius: 3px;
+  border: transparent;
+  background: var(--alt-color);
+}
+
+.hide {
+  display: none;
+}
+
+.input-label {
+  font-size: 0.8em;
+  padding: 2px;
+  color: black;
+  text-align: left;
+}
+
+/* Testing English/Arablic text  */
+.langEn::after{
+  content: attr(data-en);
+}
+
+.langAr::after{
+  content: attr(data-ar);
+}
+
+.info {
+  padding-left:5px;
+	text-decoration: underline;
+	font-style: italic;
+	color: var(--highlight);
+  cursor:pointer;
+}
+
+input,
+textarea {
+  border-radius: 3px;
+  border: 1px solid #b7b7b7;
+  padding: 8px 2px;
+  font-size: 0.9em;
+}
+
+
+.small{
+  max-width:150px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 70px;
+  font-size: small;
+  font-family: inherit;
+}
+
+select {
+  border-bottom: 1px solid #b7b7b7;
+  padding: 0.5em 0.5em;
+  font-size: 0.9em;
+  background: transparent;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+  padding-bottom: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.subHead {
+  margin: 0;
+  padding: 6px;
+  border-bottom: 2px solid var(--highlight);
+  width: 100%;
+  font-size:0.85em;
+  font-weight:600;
+  background: var(--alt-color);
+  opacity: 0.9;
+}
+
+
+.subHead:focus {
+  background-color: var(--highlight);
+}
+
+.input-group {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 10px;
+}
+
+.input-group > input {
+  flex-grow: 2;
+}
+
+/* Table   */
+table {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+table tr {
+  text-align: center;
+  padding: 5px;
+}
+
+tbody > tr:hover {
+  box-shadow: inset 5px 0 0
+    var(--highlight), inset -1px 0 0 #dadce0, 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+      0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  z-index: 2;
+  background-color: var(--hover-color) !important;
+}
+
+table tr:nth-child(2n + 1) {
+  background: var(--alt-color);
+  transition-duration: 1s;
+}
+
+th {
+  background: var(--sub-text);
+  font-size: 13px;
+  padding: 5px;
+  color: var(--head-text);
+  font-weight: 200;
+  box-shadow: inset -1px 0 0 #dadce0, 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+    0 1px 3px 1px rgba(60, 64, 67, 0.15);
+}
+
+button {
+  background: var(--head-color);
+  border: transparent;
+  border-radius: 2px;
+  color: var(--head-text);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 3px 10px;
+  margin-top: 5px;
+}
+
+button:hover {
+  background-color: var(--highlight);
+}
+
+.btnBig {
+  font-size: 1em;
+  padding: 7px 25px;
+}
+
+.message {
+  display: none;
+  flex-direction: column;
+  /* align-content: center; */
+  align-items: center;
+  padding: 15px;
+  background: var(--hover-color);
+}
+
+.message span {
+  padding: 10px;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.7em;
+  padding: 5px;
+  background-color: var(--ss-color);
+  color: var(--text-color);
+}
+
+footer > a {
+  color: var(--head-color);
+}
+
+.center{
+  text-align:center;
+}
+
+
+.lowPriority{
+  display:block;
+}
+
+#logFrm{
+  width: 300px;
+  margin-top: 50px;
+}
+
+@media only screen and (max-width: 800px) { 
+  .sec{
+    padding:5px;
+  }
+  
+  .lowPriority{
+    display:none;
+  }
+  
+  .main form{
+    margin:10px;
+  }
+  
+  #logFrm{
+    width:inherit;
+    margin:50px;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .input-label {
+    padding: 3px;
+  }
+
+  .row .input-group {
+    display: grid;
+  }
+
+  .customInput-group {
+    flex-direction: column;
+  }
+
+  .customInput-group label {
+    margin-top: 10px;
+  }
+}
