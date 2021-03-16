@@ -7,7 +7,7 @@
   "description": "A demo web app for Incidents Reporting",
   "main": "server.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node server"
   },
   "dependencies": {
     "express": "^4.17.1",
