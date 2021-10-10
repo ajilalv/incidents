@@ -13,10 +13,9 @@ const localConfig = {
 };
 
 const stagingConfig = {
-  host: 'host',
-  user: 'username',
-  password: 'password',
-  database: 'nofstgdb',
+  host: ${{ secrets.SQLHOSTNAME }},
+  user: ${{ secrets.SQLUSERNAME }},
+  password: ${{ secrets.SQLPASS }},
   ssl  : {
     ca : fs.readFileSync(path.resolve(__dirname ,"./mysql.crt"))
   }
