@@ -13,9 +13,9 @@ const localConfig = {
 };
 
 const stagingConfig = {
-  host: process.env.SQLHOSTNAME,
-  user: process.env.SQLUSERNAME,
-  password: process.env.SQLPASS,
+  host: MYSQLCONNSTR_DBHOST,
+  user: MYSQLCONNSTR_DBUSER,
+  password: MYSQLCONNSTR_DBPASS,
   ssl  : {
     ca : fs.readFileSync(path.resolve(__dirname ,"./mysql.crt"))
   }
