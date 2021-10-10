@@ -8,7 +8,7 @@ exports.NewIncident = function(req, res, next) {
 
 //Show all the existing incidents related to the current user organization
 exports.getAllIncidents = function(req, res, next) {
-  mysql.getData(req.user.UORG_ID, function(result) {
+  mysql.getIncidents(req.user.UORG_ID, function(result) {
     res.render("allIncidents", { incidents: result });
   });
 };
