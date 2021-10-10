@@ -16,6 +16,7 @@ const stagingConfig = {
   host: process.env.MYSQLCONNSTR_DBHOST,
   user: process.env.MYSQLCONNSTR_DBUSER,
   password: process.env.MYSQLCONNSTR_DBPASS,
+  database: 'avschema',
   ssl  : {
     ca : fs.readFileSync(path.resolve(__dirname ,"./mysql.crt"))
   }
