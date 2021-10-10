@@ -26,5 +26,3 @@ Demo web page for Incidents Reporting
 | 2   | IncOrgs    | Organisation Details             |
 | 3   | IncUsers   | User Details                     |
 | 4   | IncTests   | Test Results Details             |
-
-## Made by [Glitch](https://glitch.com/)

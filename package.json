@@ -2,27 +2,27 @@
   "//1": "describes your app and its dependencies",
   "//2": "https://docs.npmjs.com/files/package.json",
   "//3": "updating this file will download and update your packages",
-  "name": "hello-sqlite",
+  "name": "tad-inci-report",
   "version": "0.0.1",
-  "description": "A demo web app for Incidents Reporting",
-  "main": "server.js",
+  "description": "Web app for Incidents Reporting",
+  "main": "app.js",
   "scripts": {
-    "start": "node server"
+    "start": "node app.js"
   },
   "dependencies": {
-    "express": "^4.17.1",
-    "sqlite3": "^5.0.0",
-    "ejs": "^3.1.5",
     "body-parser": "^1.19.0",
-    "passport-local": "^1.0.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mysql": "^2.18.1",
     "passport": "^0.4.1",
-    "express-session": "^1.17.1"
+    "passport-local": "^1.0.0"
   },
   "engines": {
     "node": "12.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/hello-sqlite"
+    "url": "https://glitch.com/edit/#!/incidents?path=README.md%3A1%3A0"
   },
   "license": "MIT",
   "keywords": [

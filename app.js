@@ -32,6 +32,6 @@ app.use("/incidents", incidentsRouter);
 app.use("/user", userRouter);
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT || 1337, () => {
+var listener = app.listen(process.env.PORT, () => {
   console.log(`Your app is listening on port ${listener.address().port}`);
 });
