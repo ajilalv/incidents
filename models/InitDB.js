@@ -2,7 +2,7 @@
 class InitDB {
   constructor() {
     const fs = require("fs");
-    const dbFile = "./.data/incidentsV5.db";
+    const dbFile = "./data/incidentsV5.db";
     const dbExists = fs.existsSync(dbFile);
 
     const sqlite3 = require("sqlite3").verbose();

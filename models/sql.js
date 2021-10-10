@@ -1,4 +1,20 @@
-const db = require("./InitDB.js");
+/* 	Ajilal Vijayan, 
+Technical Affairs Department, MOTC
+*/
+
+//const db = require("./InitDB.js"); //used for testing with Sqlite
+const mysqlDB = require("./mysql.js");
+
+/**
+ * Send the query result by invoking the callback
+ * @param {err} err 
+ * @param {object} results 
+ * @param {function} callback 
+ */
+function sendResult(error, results, callback) {
+  error ? callback(error, null) : callback(null, results[0])
+}
+
 
 /**
  * Get all the Incidents records for the current user's Organization
@@ -7,12 +23,10 @@ const db = require("./InitDB.js");
  * @return {object} rows -> if error null, else the records
  */
 function getIncidents(orgid, callback) {
-  db.all(
-    "SELECT * FROM Incidents T1 INNER JOIN IncOrgs T2 ON T1.INC_ReportOrg = T2.ORG_ID WHERE T1.INC_ReportOrg = ?",
-    orgid,
-    (err, rows) => {
-      callback(rows);
-    }
+  mysqlDB.executeQuery(
+    `SELECT * FROM Incidents T1 INNER JOIN IncOrgs T2 ON T1.INC_ReportOrg = T2.ORG_ID WHERE T1.INC_ReportOrg = ?`,
+    [orgid],
+    (error, results) => error ? callback(error, null) : callback(results)
   );
 }
 
@@ -25,15 +39,10 @@ function getIncidents(orgid, callback) {
  * @return {object} rows -> if error null, else the records
  */
 function getIncident(recordId, userId, callback) {
-  db.get(
-    "SELECT * FROM Incidents  WHERE INC_ID = ? AND INC_ReportPerson = ?",
-    recordId,
-    userId,
-    (error, row) => {
-      if (error) {
-        callback(null);
-      } else callback(row);
-    }
+  mysqlDB.executeQuery(
+    `SELECT * FROM Incidents  WHERE INC_ID = ? AND INC_ReportPerson = ?`,
+    [recordId, userId],
+    (error, results) => error ? callback(error, null) : callback(results)
   );
 }
 
@@ -45,14 +54,10 @@ function getIncident(recordId, userId, callback) {
  * @return {object} rows -> if error null, else the record
  */
 function getUser(uname, upass, callback) {
-  db.get(
-    "SELECT * FROM IncUsers WHERE UEMAIL = ? AND UPASS = ?",
-    uname,
-    upass,
-    (err, row) => {
-      if (err) callback(err, null);
-      else callback(err, row);
-    }
+  mysqlDB.executeQuery(
+    `SELECT * FROM IncUsers WHERE UEMAIL = ? AND UPASS = ?`,
+    [uname, upass],
+    (err, results) => sendResult(err, results, callback)
   );
 }
 
@@ -63,13 +68,10 @@ function getUser(uname, upass, callback) {
  * @return {object} rows -> if error null, else the record
  */
 function getUserDetails(userId, callback) {
-  db.get(
-    "SELECT T1.UNAME,T1.UTITLE,T1.UPHONE,T2.ORG_NAME,T1.UEMAIL,T1.UORG_ID,T1.USER_ID FROM IncUsers T1 INNER JOIN IncOrgs T2 ON T1.UORG_ID = T2.ORG_ID  WHERE USER_ID = ? ",
-    userId,
-    (err, row) => {
-      if (err) callback(err, null);
-      else callback(null, row);
-    }
+  mysqlDB.executeQuery(
+    `SELECT T1.UNAME,T1.UTITLE,T1.UPHONE,T2.ORG_NAME,T1.UEMAIL,T1.UORG_ID,T1.USER_ID FROM IncUsers T1 INNER JOIN IncOrgs T2 ON T1.UORG_ID = T2.ORG_ID  WHERE USER_ID = ?`,
+    [userId],
+    (err, results) => sendResult(err, results, callback)
   );
 }
 
@@ -91,9 +93,9 @@ function postIncident(post, callback) {
     const injHospChecked =
       injuryChecked && post.injury.injHospAdmChecked ? 1 : 0;
     const testChecked = post.tests.testChecked ? 1 : 0;
-    db.serialize(function() {
-      db.run(
-        `INSERT INTO Incidents (INC_ReportPerson,INC_ReportOrg,
+
+    const postIncidentQuery = mysqlDB.executeQuery(
+      `INSERT INTO Incidents (INC_ReportPerson,INC_ReportOrg,
                               ORG_MANAGER,ORG_SP_OPER,ORG_SP_MAINT,ORG_OTHERS,
                               INC_TYPE,INC_Weather,INC_DATE,INC_YOUR_REF,
                               INC_LOCATION,LOC_INFO,LOC_CHAINAGE,LOC_STATION,LOC_STATION2,
@@ -103,74 +105,70 @@ function postIncident(post, callback) {
                               DESC_FULL,DESC_CAUSE,DESC_CONSQ
       )  
       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-        cleanseString(post.user.INC_ReportPerson),
-        cleanseString(post.user.INC_ReportOrg),
-        cleanseString(post.orgInvolved.orgInfraValue),
-        cleanseString(post.orgInvolved.orgSPOperValue),
-        cleanseString(post.orgInvolved.orgSPMainValue),
-        cleanseString(post.orgInvolved.orgOthValue),
-        cleanseString(post.inctype.incType),
-        cleanseString(post.inctype.IncWeathValue),
-        cleanseString(post.inctype.IncTimeValue),
-        cleanseString(post.inctype.IncYourRefValue),
-        cleanseString(post.location.locType),
-        cleanseString(post.location.locValue1),
-        cleanseString(post.location.locValue2),
-        cleanseString(post.location.locValue3),
-        cleanseString(post.location.locValue4),
+      [post.user.INC_ReportPerson,
+      cleanseString(post.user.INC_ReportOrg),
+      cleanseString(post.orgInvolved.orgInfraValue),
+      cleanseString(post.orgInvolved.orgSPOperValue),
+      cleanseString(post.orgInvolved.orgSPMainValue),
+      cleanseString(post.orgInvolved.orgOthValue),
+      cleanseString(post.inctype.incType),
+      cleanseString(post.inctype.IncWeathValue),
+      cleanseString(post.inctype.IncTimeValue),
+      cleanseString(post.inctype.IncYourRefValue),
+      cleanseString(post.location.locType),
+      cleanseString(post.location.locValue1),
+      cleanseString(post.location.locValue2),
+      cleanseString(post.location.locValue3),
+      cleanseString(post.location.locValue4),
         infraChecked,
-        cleanseString(post.infraInvolved.infraInvolTrainValue),
-        cleanseString(post.infraInvolved.infraInvolRVNValue),
-        cleanseString(post.infraInvolved.infraInvolOtherValue),
-        cleanseString(post.infraInvolved.infraInvolDescValue),
+      cleanseString(post.infraInvolved.infraInvolTrainValue),
+      cleanseString(post.infraInvolved.infraInvolRVNValue),
+      cleanseString(post.infraInvolved.infraInvolOtherValue),
+      cleanseString(post.infraInvolved.infraInvolDescValue),
         injuryChecked,
-        cleanseString(post.injury.injuredSelected),
-        cleanseString(post.injury.injSeverValue),
+      cleanseString(post.injury.injuredSelected),
+      cleanseString(post.injury.injSeverValue),
         injHospChecked,
         testChecked,
-        cleanseString(post.desc.descValue1),
-        cleanseString(post.desc.descValue2),
-        cleanseString(post.desc.descValue3),
+      cleanseString(post.desc.descValue1),
+      cleanseString(post.desc.descValue2),
+      cleanseString(post.desc.descValue3)],
 
-        error => {
-          if (error) {
-            //console.log(error);
-            callback({ message: false });
-          } else {
-            db.get("SELECT MAX(INC_ID) as ID  FROM Incidents", (err, row) => {
-              //console.log(row);
-
-              //add test data if any
-              if (post.tests.testChecked) {
-                Object.keys(post.testData).forEach(key => {
-                  let test = post.testData[key];
-                  //console.log(test);
-                  db.run(
-                    "INSERT INTO Tests (INC_ID,NAME,POS,TYPE,TDATE,RESULT)  VALUES (?,?,?,?,?,?)",
-                    row.ID,
-                    cleanseString(test.name),
-                    cleanseString(test.pos),
-                    cleanseString(test.type),
-                    cleanseString(test.data),
-                    cleanseString(test.result)
-                  );
-                });
-              }
-              callback({ message: true, id: row.ID });
+      (error, results) => {
+        if (error) {
+          //console.log(error);
+          callback({ message: false });
+        } else {
+          //console.log(results)
+          //add test data if any
+          if (post.tests.testChecked) {
+            Object.keys(post.testData).forEach(key => {
+              let test = post.testData[key];
+              //console.log(test);
+              mysqlDB.executeQuery(
+                "INSERT INTO Tests (INC_ID,NAME,POS,TYPE,TDATE,RESULT)  VALUES (?,?,?,?,?,?)",
+                results.insertId,
+                cleanseString(test.name),
+                cleanseString(test.pos),
+                cleanseString(test.type),
+                cleanseString(test.data),
+                cleanseString(test.result)
+              );
             });
           }
+          callback({ message: true, id: results.insertId });
         }
-      );
-    });
+      }
+    );
   }
 }
 
 // helper function that prevents html/css/script malice
-const cleanseString = function(string) {
+const cleanseString = function (string) {
   return string.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 };
 
-module.exports.getData = getIncidents;
+module.exports.getIncidents = getIncidents;
 module.exports.postIncident = postIncident;
 module.exports.getIncident = getIncident;
 module.exports.getUser = getUser;
