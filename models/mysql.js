@@ -22,10 +22,10 @@ const stagingConfig = {
   }
 };
 
-const connection = mysql.createConnection(stagingConfig);
+const conctnPool = mysql.createPool(stagingConfig);
 
 exports.executeQuery = function RunQuery(qry, inputs, done) {
-  connection.query(qry, inputs, function (error, results, fields) {
+  conctnPool.query(qry, inputs, function (error, results, fields) {
     if (error) return done(error, null);
     return done(null, results)
   });
