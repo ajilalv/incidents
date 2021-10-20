@@ -23,7 +23,7 @@ exports.creds = {
   responseMode: 'form_post', 
 
   // Required, the reply URL registered in AAD for your app
-  redirectUrl: 'https://incidentsv2.glitch.me/user/auth/openid/return', 
+  redirectUrl: 'https://nof-test.azurewebsites.net/user/auth/openid/return', 
 
   // Required if we use http for redirectUrl
   allowHttpForRedirectUrl: false,
@@ -70,4 +70,4 @@ exports.creds = {
 };
 
 // The url you need to go to destroy the session with AAD
-exports.destroySessionUrl = 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=https://incidentsv2.glitch.me/';
+exports.destroySessionUrl = 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=https://nof-test.azurewebsites.net/';
