@@ -1,4 +1,5 @@
 const express = require("express");
+const cookieParser = require('cookie-parser');
 const bodyParser = require("body-parser");
 const passport = require("./routes/passport.js");
 
@@ -11,6 +12,7 @@ const app = express();
 
 app.use(express.static("public"));
 app.set("view engine", "ejs"); // set the view engine to ejs
+app.use(cookieParser());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); // parse application/json
