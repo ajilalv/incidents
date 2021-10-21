@@ -1,6 +1,8 @@
+const TNAME = 'ajilalvgmail964';
+//process.env.TENANT_NAME
 exports.creds = {
   // Required
-  identityMetadata: `https://login.microsoftonline.com/${process.env.TENANT_NAME}.onmicrosoft.com/v2.0/.well-known/openid-configuration`, 
+  identityMetadata: `https://login.microsoftonline.com/${TNAME}.onmicrosoft.com/v2.0/.well-known/openid-configuration`, 
   //identityMetadata: `https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration`,
   // or equivalently: 'https://login.microsoftonline.com/<tenant_guid>/v2.0/.well-known/openid-configuration'
   //
@@ -33,7 +35,7 @@ exports.creds = {
 
   // Required if you want to provide the issuer(s) you want to validate instead of using the issuer from metadata
   // issuer could be a string or an array of strings of the following form: 'https://sts.windows.net/<tenant_guid>/v2.0'
-  issuer: `https://sts.windows.net/${process.env.TENANT_NAME}/v2.0`,
+  issuer: `https://sts.windows.net/${TNAME}/v2.0`,
 
   // Required to set to true if the `verify` function has 'req' as the first parameter
   passReqToCallback: false,
