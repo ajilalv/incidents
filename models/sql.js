@@ -12,6 +12,7 @@ const mysqlDB = require("./mysql.js");
  * @param {function} callback 
  */
 function sendResult(error, results, callback) {
+  //console.log(error,results)
   error ? callback(error, null) : callback(null, results[0])
 }
 
@@ -47,27 +48,27 @@ function getIncident(recordId, userId, callback) {
 }
 
 /**
- * Get a user by email and pass for validation
- * @param {string} uname -> email
- * @param {string} upass -> password
+ * Get a user by objectid for validation
+ * @param {string} uoid -> user object id
  * @param {function} callback -> callback function
  * @return {object} rows -> if error null, else the record
  */
-function getUser(uname, upass, callback) {
+function getUser(uoid, callback) {
+  //console.log('LOOKING FOR, ',uoid)
   mysqlDB.executeQuery(
-    `SELECT * FROM IncUsers WHERE UEMAIL = ? AND UPASS = ?`,
-    [uname, upass],
+    `SELECT * FROM IncUsers WHERE USER_ID = ?`, [uoid],
     (err, results) => sendResult(err, results, callback)
   );
 }
 
 /**
  * Get a user details(except password) by ID
- * @param {Number} userId -> ID of user
+ * @param {Number} userId -> Object ID of user
  * @param {function} callback -> callback function
  * @return {object} rows -> if error null, else the record
  */
 function getUserDetails(userId, callback) {
+   //console.log('LOOKING FOR user details, ',userId)
   mysqlDB.executeQuery(
     `SELECT T1.UNAME,T1.UTITLE,T1.UPHONE,T2.ORG_NAME,T1.UEMAIL,T1.UORG_ID,T1.USER_ID FROM IncUsers T1 INNER JOIN IncOrgs T2 ON T1.UORG_ID = T2.ORG_ID  WHERE USER_ID = ?`,
     [userId],
